@@ -15,37 +15,37 @@
           <column>
             <header>Nr</header>
             <headercol>0</headercol>
-            <width>3000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Datum</header>
             <headercol>1</headercol>
-            <width>4000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Actie</header>
             <headercol>2</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Wie</header>
             <headercol>3</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Gereed</header>
             <headercol>4</headercol>
-            <width>4000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Status</header>
             <headercol>5</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Opmerkingen</header>
             <headercol>6</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
         </columns>
       </elements>
@@ -58,22 +58,22 @@
           <column>
             <header>Nr</header>
             <headercol>0</headercol>
-            <width>3000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Datum</header>
             <headercol>1</headercol>
-            <width>4000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Besluit</header>
             <headercol>2</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Opmerkingen</header>
             <headercol>3</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
         </columns>
       </elements>
@@ -86,52 +86,52 @@
           <column>
             <header>Nr</header>
             <headercol>0</headercol>
-            <width>3000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Datum</header>
             <headercol>1</headercol>
-            <width>4000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Omschrijving</header>
             <headercol>2</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Prioriteit</header>
             <headercol>3</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Categorie</header>
             <headercol>4</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Melder</header>
             <headercol>5</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Wie</header>
             <headercol>6</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Status</header>
             <headercol>7</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Opgelost</header>
             <headercol>8</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
           <column>
             <header>Opmerkingen</header>
             <headercol>9</headercol>
-            <width>6000</width>
+            <width>0</width>
           </column>
         </columns>
       </elements>

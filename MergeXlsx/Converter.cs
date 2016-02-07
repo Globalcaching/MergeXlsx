@@ -52,6 +52,9 @@ namespace MergeXlsx
                 }
             }
 
+            var dateStyle = _workbook.CreateCellStyle();
+            dateStyle.DataFormat = _workbook.CreateDataFormat().GetFormat("dd-MM-yyyy");
+
             //add columns
             foreach (var sheet in _settings.Sheets)
             {
@@ -61,15 +64,14 @@ namespace MergeXlsx
                 {
                     ICell cell = wbsheet.GetOrCreateCell(sheet.HeaderRow, column.HeaderCol);
                     cell.SetCellValue(column.Header);
-                    wbsheet.SetColumnWidth(column.HeaderCol, column.Width);
+                    cell.CellStyle = dateStyle;
+                    if (column.Width != 0)
+                    {
+                        wbsheet.SetColumnWidth(column.HeaderCol, column.Width);
+                    }
+                    wbsheet.GetRow(sheet.HeaderRow).RowStyle = dateStyle;
                 }
             }
-
-            var dateStyle = _workbook.CreateCellStyle();
-            dateStyle.DataFormat = _workbook.CreateDataFormat().GetFormat("dd-MM-yyyy");
-
-            //var txtStyle = _workbook.CreateCellStyle();
-            //txtStyle.WrapText = true;
 
             //run through all documents
             for (int i = 0; i < _sourceFiles.Count; i++)
@@ -95,6 +97,7 @@ namespace MergeXlsx
                             {
                                 ActiveRow = wbsheet.GetOrCreateRow(sheet.ItemCount + sheet.HeaderRow + 1);
                                 sheet.ItemCount++;
+                                ActiveRow.Height = r.Height;
                             }
                             foreach (var c in r.Cells)
                             {
@@ -104,6 +107,18 @@ namespace MergeXlsx
                                     if (index >= 0)
                                     {
                                         indexes[index] = c.ColumnIndex;
+                                        if (sheet.ItemCount == 0)
+                                        {
+                                            if (sheet.Elements.Columns[index].Width == 0)
+                                            {
+                                                wbsheet.SetColumnWidth(sheet.Elements.Columns[index].HeaderCol, Math.Max(srcwbsheet.GetColumnWidth(c.ColumnIndex), wbsheet.GetColumnWidth(sheet.Elements.Columns[index].HeaderCol)));
+                                            }
+                                            if (r.RowStyle != null)
+                                            {
+                                                wbsheet.GetRow(sheet.HeaderRow).RowStyle.CloneStyleFrom(r.RowStyle);
+                                            }
+                                            wbsheet.GetRow(sheet.HeaderRow).GetCell(sheet.Elements.Columns[index].HeaderCol).CellStyle.CloneStyleFrom(c.CellStyle);
+                                        }
                                     }
                                 }
                                 else
@@ -112,13 +127,18 @@ namespace MergeXlsx
                                     if (col >= 0)
                                     {
                                         var cell = ActiveRow.GetOrCreateCol(sheet.Elements.Columns[col].HeaderCol);
+                                        if (r.RowStyle != null)
+                                        {
+                                            ActiveRow.RowStyle = dateStyle;
+                                            ActiveRow.RowStyle.CloneStyleFrom(r.RowStyle);
+                                        }
+                                        cell.CellStyle = dateStyle;
                                         switch (c.CellType)
                                         {
                                             case CellType.Numeric:
                                                 try
                                                 {
                                                     cell.SetCellValue(c.DateCellValue);
-                                                    cell.CellStyle = dateStyle;
                                                 }
                                                 catch
                                                 {
@@ -140,6 +160,11 @@ namespace MergeXlsx
                                                 break;
                                         }
                                         cell.SetCellType(c.CellType);
+                                        cell.CellStyle.CloneStyleFrom(c.CellStyle);
+                                        if (sheet.Elements.Columns[col].Width == 0)
+                                        {
+                                            wbsheet.SetColumnWidth(sheet.Elements.Columns[col].HeaderCol, Math.Max(srcwbsheet.GetColumnWidth(c.ColumnIndex), wbsheet.GetColumnWidth(sheet.Elements.Columns[col].HeaderCol)));
+                                        }
                                     }
                                 }
                             }
